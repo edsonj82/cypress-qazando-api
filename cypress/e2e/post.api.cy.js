@@ -1,6 +1,8 @@
 /// <reference types="cypress"/>
 
-describe('Create device', () => {
+
+// TODO: INCLUIR TODOS OS CENÁRIOS DE TESTES POSSÍVEIS
+describe('POST', () => {
     it('Register a device', () => {
 
         const currentDate = new Date().toISOString().slice(0, 10)

@@ -1,6 +1,8 @@
 /// <reference types="cypress"/>
 
-describe('Search devices', () => {
+
+// TODO: INCLUIR TODOS OS CENÁRIOS DE TESTES POSSÍVEIS 
+describe('GET', () => {
     it('search aspecific device', () => {
 
         const device_id = '7'

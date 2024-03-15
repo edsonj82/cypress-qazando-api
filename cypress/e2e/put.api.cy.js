@@ -1,9 +1,9 @@
 /// <reference types="cypress"/>
 
 // TODO: INCLUIR TODOS OS CENÁRIOS DE TESTES POSSÍVEIS
-describe('DELETE', () => {
+describe('UPDATE', () => {
 
-    it('Delete a device', () => {
+    it('Update a device', () => {
 
         const body = {
             "name": "QAzando Mobile Phone",
@@ -12,6 +12,17 @@ describe('DELETE', () => {
                 "price": 1849.99,
                 "CPU model": "Intel Core i9",
                 "Hard disk size": "1 TB"
+            }
+        }
+
+        const body_update = {
+            "name": "QAzando Mobile Phone UPDATE",
+            "data": {
+                "year": 2020,
+                "price": 1849.99,
+                "CPU model": "Intel Core i9",
+                "Hard disk size": "1 TB",
+                "owner": "Xpto Ltda"
             }
         }
 
@@ -24,17 +35,20 @@ describe('DELETE', () => {
 
         cy.get('@postDeviceResult').then((response_post) => {
             expect(response_post.status).equal(200)
-            // console.log(response_post.body.id)
+            expect(response_post.body.name).equal(body.name)
 
             cy.request({
-                method: 'DELETE',
+                method: 'PUT',
                 url: `https://api.restful-api.dev/objects/${response_post.body.id}`,
-                failOnStatusCode: false
-            }).as('deleteDeviceResult')
+                failOnStatusCode: false,
+                body: body_update
+            }).as('putDeviceResult')
 
-            cy.get('@deleteDeviceResult').then((response) => {
+            cy.get('@putDeviceResult').then((response) => {
                 expect(response.status).equal(200)
-                expect(response.body.message).equal(`Object with id = ${response_post.body.id} has been deleted.`)
+                expect(response.body.name).equal(body_update.name)
+
+                // expect(response.body.message).equal(`Object with id = ${response_post.body.id} has been deleted.`)
 
             })
 
