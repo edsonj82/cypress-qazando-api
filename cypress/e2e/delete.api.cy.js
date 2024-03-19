@@ -41,4 +41,22 @@ describe('DELETE', () => {
         })
 
     });
-})
+
+    it.only('Delete a device does not exists', () => {
+        const id_invalid = "Teste"
+
+        cy.request({
+            method: 'DELETE',
+            url: `https://api.restful-api.dev/objects/${id_invalid}`,
+            failOnStatusCode: false
+        }).as('deleteDeviceResult')
+
+        cy.get('@deleteDeviceResult').then((response) => {
+            expect(response.status).equal(404)
+            expect(response.body.error).equal(`Object with id = ${id_invalid} doesn't exist.`)
+
+        })
+
+    })
+
+});
