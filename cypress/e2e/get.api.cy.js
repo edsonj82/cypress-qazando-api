@@ -3,14 +3,11 @@
 
 // TODO: INCLUIR TODOS OS CENÁRIOS DE TESTES POSSÍVEIS 
 describe('GET', () => {
-    it('search aspecific device', () => {
+    it('search a specific device', () => {
 
         const device_id = '7'
-        cy.request({
-            method: 'GET',
-            url: `https://api.restful-api.dev/objects/${device_id}`,
-            failOnStatusCode: false
-        }).as('getDeviceResult')
+        cy.searchDevice(device_id).as('getDeviceResult')
+
         cy.get('@getDeviceResult')
             .then((response) => {
                 // console.log('STATUS CODE', response.status)
@@ -25,6 +22,19 @@ describe('GET', () => {
                 expect(response.body.data['CPU model']).equal('Intel Core i9')
                 expect(response.body.data['Hard disk size']).not.empty
                 expect(response.body.data['Hard disk size']).equal('1 TB')
+            })
+    });
+
+    it('devices was not found', () => {
+
+        const device_id = 'xpto'
+
+        cy.searchDevice(device_id)
+            .then((response) => {
+                // console.log('STATUS CODE', response.status)
+                expect(response.status).equal(404)
+                expect(response.body.error).equal(`Oject with id=${device_id} was not found.`)
+
             })
     });
 })

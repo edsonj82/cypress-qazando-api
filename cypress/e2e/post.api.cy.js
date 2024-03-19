@@ -18,14 +18,7 @@ describe('POST', () => {
             }
         }
 
-        cy.request({
-            method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
-            failOnStatusCode: false,
-            body: body
-        }).as('postDeviceResult')
-
-        cy.get('@postDeviceResult').then((response) => {
+        cy.registerDevice(body).then((response) => {
             expect(response.status).equal(200)
             expect(response.body.id).not.empty
             expect(response.body.name).equal('QAzando Mobile Phone')
@@ -49,14 +42,7 @@ describe('POST', () => {
 
     it('Register a device without data', () => {
 
-        cy.request({
-            method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
-            failOnStatusCode: false,
-            body: ''
-        }).as('postDeviceResult')
-
-        cy.get('@postDeviceResult').then((response) => {
+        cy.registerDevice('').then((response) => {
             expect(response.status).equal(400)
             expect(response.body.error).equal('400 Bad Request. If you are trying to create or update the data, potential issue is that you are sending incorrect body json or it is missing at all.')
         })
