@@ -19,6 +19,17 @@ Cypress.Commands.add('searchDevice', (device_id) => {
         return response
     })
 })
+
+Cypress.Commands.add('registerDevice', (payload) => {
+    cy.request({
+        method: 'POST',
+        url: '/objects',
+        failOnStatusCode: false,
+        body: payload
+    }).then((response) => {
+        return response
+    })
+})
 //
 //
 // -- This is a child command --
