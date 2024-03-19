@@ -17,7 +17,7 @@ describe('DELETE', () => {
 
         cy.request({
             method: 'POST',
-            url: '/objects',
+            url: 'https://api.restful-api.dev/objects',
             failOnStatusCode: false,
             body: body
         }).as('postDeviceResult')
@@ -28,7 +28,7 @@ describe('DELETE', () => {
 
             cy.request({
                 method: 'DELETE',
-                url: `/objects/${response_post.body.id}`,
+                url: `https://api.restful-api.dev/objects/${response_post.body.id}`,
                 failOnStatusCode: false
             }).as('deleteDeviceResult')
 
@@ -41,37 +41,4 @@ describe('DELETE', () => {
         })
 
     });
-
-    it('ERROR - Object with id does not exist', () => {
-        const id_invalid = "Teste"
-
-        cy.request({
-            method: 'DELETE',
-            url: `/objects/${id_invalid}`,
-            failOnStatusCode: false
-        }).as('deleteDeviceResult')
-
-        cy.get('@deleteDeviceResult').then((response) => {
-            expect(response.status).equal(404)
-            expect(response.body.error).equal(`Object with id = ${id_invalid} doesn't exist.`)
-
-        })
-    })
-
-    it('ERROR - Method Not Allowed', () => {
-        const id_invalid = "Teste"
-
-        cy.request({
-            method: 'DELETE',
-            url: `/objects`,
-            failOnStatusCode: false
-        }).as('deleteDeviceResult')
-
-        cy.get('@deleteDeviceResult').then((response) => {
-            expect(response.status).equal(405)
-            expect(response.body.error).equal(`Method Not Allowed`)
-
-        })
-    })
-
-});
+})

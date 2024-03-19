@@ -30,6 +30,17 @@ Cypress.Commands.add('registerDevice', (payload) => {
         return response
     })
 })
+
+Cypress.Commands.add('deleteDevice', (body) => {
+    cy.request({
+        method: 'POST',
+        url: '/objects',
+        failOnStatusCode: false,
+        body: body
+    }).then((response) => {
+        return response
+    })
+})
 //
 //
 // -- This is a child command --
