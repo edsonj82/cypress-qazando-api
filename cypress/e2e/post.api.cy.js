@@ -31,7 +31,7 @@ describe('POST', () => {
             expect(response.body.name).equal('QAzando Mobile Phone')
             expect(response.body.createdAt).not.empty
             // console.log('TEST: ', response.body.data.year)
-            expect(response.body.createdAt.slice(0,16)).to.equal(new Date().toISOString().slice(0,16))
+            expect(response.body.createdAt.slice(0, 16)).to.equal(new Date().toISOString().slice(0, 16))
             expect(response.body.data.year).not.string
             expect(response.body.data.year).to.equal(2024)
             expect(response.body.data.price).not.string
@@ -44,6 +44,21 @@ describe('POST', () => {
             expect(response.body.createdAt.slice(0, 10)).equal(currentDate)
             //HOUR
             expect(response.body.createdAt.slice(12, 16)).equal(currentHour)
+        })
+    })
+
+    it.only('Register a device without data', () => {
+
+        cy.request({
+            method: 'POST',
+            url: 'https://api.restful-api.dev/objects',
+            failOnStatusCode: false,
+            body: ''
+        }).as('postDeviceResult')
+
+        cy.get('@postDeviceResult').then((response) => {
+            expect(response.status).equal(400)
+            expect(response.body.error).equal('400 Bad Request. If you are trying to create or update the data, potential issue is that you are sending incorrect body json or it is missing at all.')
         })
     })
 })

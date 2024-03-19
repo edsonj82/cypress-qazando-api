@@ -42,7 +42,7 @@ describe('DELETE', () => {
 
     });
 
-    it.only('Delete a device does not exists', () => {
+    it('Delete a device does not exists', () => {
         const id_invalid = "Teste"
 
         cy.request({
