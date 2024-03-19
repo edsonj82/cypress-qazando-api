@@ -42,7 +42,7 @@ describe('DELETE', () => {
 
     });
 
-    it('Delete a device does not exists', () => {
+    it('ERROR - Object with id does not exist', () => {
         const id_invalid = "Teste"
 
         cy.request({
@@ -56,7 +56,22 @@ describe('DELETE', () => {
             expect(response.body.error).equal(`Object with id = ${id_invalid} doesn't exist.`)
 
         })
+    })
 
+    it.only('ERROR - Method Not Allowed', () => {
+        const id_invalid = "Teste"
+
+        cy.request({
+            method: 'DELETE',
+            url: `https://api.restful-api.dev/objects`,
+            failOnStatusCode: false
+        }).as('deleteDeviceResult')
+
+        cy.get('@deleteDeviceResult').then((response) => {
+            expect(response.status).equal(405)
+            expect(response.body.error).equal(`Method Not Allowed`)
+
+        })
     })
 
 });

@@ -47,7 +47,7 @@ describe('POST', () => {
         })
     })
 
-    it.only('Register a device without data', () => {
+    it('Register a device without data', () => {
 
         cy.request({
             method: 'POST',
