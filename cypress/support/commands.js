@@ -10,7 +10,15 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('searchDevice', (device_id) => {
+    cy.request({
+        method: 'GET',
+        url: `/objects/${device_id}`,
+        failOnStatusCode: false
+    }).then((response) => {
+        return response
+    })
+})
 //
 //
 // -- This is a child command --
