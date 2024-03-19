@@ -17,7 +17,7 @@ describe('DELETE', () => {
 
         cy.request({
             method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
+            url: '/objects',
             failOnStatusCode: false,
             body: body
         }).as('postDeviceResult')
@@ -28,7 +28,7 @@ describe('DELETE', () => {
 
             cy.request({
                 method: 'DELETE',
-                url: `https://api.restful-api.dev/objects/${response_post.body.id}`,
+                url: `/objects/${response_post.body.id}`,
                 failOnStatusCode: false
             }).as('deleteDeviceResult')
 
@@ -47,7 +47,7 @@ describe('DELETE', () => {
 
         cy.request({
             method: 'DELETE',
-            url: `https://api.restful-api.dev/objects/${id_invalid}`,
+            url: `/objects/${id_invalid}`,
             failOnStatusCode: false
         }).as('deleteDeviceResult')
 
@@ -58,12 +58,12 @@ describe('DELETE', () => {
         })
     })
 
-    it.only('ERROR - Method Not Allowed', () => {
+    it('ERROR - Method Not Allowed', () => {
         const id_invalid = "Teste"
 
         cy.request({
             method: 'DELETE',
-            url: `https://api.restful-api.dev/objects`,
+            url: `/objects`,
             failOnStatusCode: false
         }).as('deleteDeviceResult')
 

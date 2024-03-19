@@ -20,7 +20,7 @@ describe('POST', () => {
 
         cy.request({
             method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
+            url: '/objects',
             failOnStatusCode: false,
             body: body
         }).as('postDeviceResult')
@@ -51,7 +51,7 @@ describe('POST', () => {
 
         cy.request({
             method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
+            url: '/objects',
             failOnStatusCode: false,
             body: ''
         }).as('postDeviceResult')
