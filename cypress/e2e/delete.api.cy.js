@@ -15,16 +15,17 @@ describe('DELETE', () => {
             }
         }
 
-        cy.request({
-            method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
-            failOnStatusCode: false,
-            body: body
-        }).as('postDeviceResult')
+        // cy.request({
+        //     method: 'POST',
+        //     url: 'https://api.restful-api.dev/objects',
+        //     failOnStatusCode: false,
+        //     body: body
+        // }).as('postDeviceResult')
 
-        cy.get('@postDeviceResult').then((response_post) => {
+        // cy.get('@postDeviceResult').then((response_post) => {
+        cy.registerDevice(body).then((response_post) => {
             expect(response_post.status).equal(200)
-             console.log(response_post.body.id)
+            console.log(response_post.body.id)
 
             // cy.request({
             //     method: 'DELETE',
