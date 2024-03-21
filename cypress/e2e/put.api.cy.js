@@ -5,26 +5,28 @@ describe('UPDATE', () => {
 
     it('Update a device', () => {
 
-        const body = {
-            "name": "QAzando Mobile Phone",
-            "data": {
-                "year": 2024,
-                "price": 1849.99,
-                "CPU model": "Intel Core i9",
-                "Hard disk size": "1 TB"
-            }
-        }
+        const body = require('../fixtures/register_device_success.json')
 
-        const body_update = {
-            "name": "QAzando Mobile Phone UPDATE",
-            "data": {
-                "year": 2020,
-                "price": 1849.99,
-                "CPU model": "Intel Core i9",
-                "Hard disk size": "1 TB",
-                "owner": "Xpto Ltda"
-            }
-        }
+        // const body = {
+        //     "name": "QAzando Mobile Phone",
+        //     "data": {
+        //         "year": 2024,
+        //         "price": 1849.99,
+        //         "CPU model": "Intel Core i9",
+        //         "Hard disk size": "1 TB"
+        //     }
+        // }
+        const body_update = require('../fixtures/update_device_success.json')
+        // const body_update = {
+        //     "name": "QAzando Mobile Phone UPDATE",
+        //     "data": {
+        //         "year": 2020,
+        //         "price": 1849.99,
+        //         "CPU model": "Intel Core i9",
+        //         "Hard disk size": "1 TB",
+        //         "owner": "Xpto Ltda"
+        //     }
+        // }
 
         cy.request({
             method: 'POST',
