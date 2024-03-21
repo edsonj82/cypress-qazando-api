@@ -3,7 +3,7 @@
 // TODO: INCLUIR TODOS OS CENÁRIOS DE TESTES POSSÍVEIS
 describe('DELETE', () => {
 
-    it('Delete a device', () => {
+    it.only('Delete a device', () => {
 
         const body = {
             "name": "QAzando Mobile Phone",
@@ -24,21 +24,21 @@ describe('DELETE', () => {
 
         cy.get('@postDeviceResult').then((response_post) => {
             expect(response_post.status).equal(200)
-            // console.log(response_post.body.id)
+             console.log(response_post.body.id)
 
-            cy.request({
-                method: 'DELETE',
-                url: `https://api.restful-api.dev/objects/${response_post.body.id}`,
-                failOnStatusCode: false
-            }).as('deleteDeviceResult')
+            // cy.request({
+            //     method: 'DELETE',
+            //     url: `https://api.restful-api.dev/objects/${response_post.body.id}`,
+            //     failOnStatusCode: false
+            // }).as('deleteDeviceResult')
 
-            cy.get('@deleteDeviceResult').then((response) => {
+            // cy.get('@deleteDeviceResult').then((response) => {
+            cy.deleteDevice(response_post.body.id).then((response) => {
+                console.log('response= ' + response)
+                console.log('erro_status= ' + response.status)
                 expect(response.status).equal(200)
                 expect(response.body.message).equal(`Object with id = ${response_post.body.id} has been deleted.`)
-
             })
-
         })
-
     });
 })

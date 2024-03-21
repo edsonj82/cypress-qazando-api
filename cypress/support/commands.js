@@ -31,12 +31,11 @@ Cypress.Commands.add('registerDevice', (payload) => {
     })
 })
 
-Cypress.Commands.add('deleteDevice', (body) => {
+Cypress.Commands.add('deleteDevice', (device_id) => {
     cy.request({
-        method: 'POST',
-        url: '/objects',
-        failOnStatusCode: false,
-        body: body
+        method: 'DELETE',
+        url: `/objects/${device_id}`,
+        failOnStatusCode: false
     }).then((response) => {
         return response
     })
